@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Learn Swag",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/users/{user}": {
+            "get": {
+                "description": "this is the description about getUser api\nthis is the description2 about getUser api",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get User",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User Name",
+                        "name": "user",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Is Test",
+                        "name": "isTest",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetUserResponse"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "token1"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.GetUserResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/api.User"
+                }
+            }
+        },
+        "api.User": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "default": 20,
+                    "maximum": 99,
+                    "minimum": 10
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "Male",
+                        " Female"
+                    ]
+                },
+                "id": {
+                    "description": "this is the id of user.",
+                    "type": "integer",
+                    "example": 123
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    }
+}

@@ -1,0 +1,67 @@
+definitions:
+  api.GetUserResponse:
+    properties:
+      code:
+        type: integer
+      msg:
+        type: string
+      user:
+        $ref: '#/definitions/api.User'
+    type: object
+  api.User:
+    properties:
+      age:
+        default: 20
+        maximum: 99
+        minimum: 10
+        type: integer
+      gender:
+        enum:
+        - Male
+        - ' Female'
+        type: string
+      id:
+        description: this is the id of user.
+        example: 123
+        type: integer
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Learn Swag
+  version: "1.0"
+paths:
+  /api/v1/users/{user}:
+    get:
+      description: |-
+        this is the description about getUser api
+        this is the description2 about getUser api
+      parameters:
+      - description: User Name
+        in: path
+        name: user
+        required: true
+        type: string
+      - default: false
+        description: Is Test
+        in: query
+        name: isTest
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: token1
+              type: string
+          schema:
+            $ref: '#/definitions/api.GetUserResponse'
+      summary: Get User
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
